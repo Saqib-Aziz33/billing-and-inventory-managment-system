@@ -8,14 +8,20 @@
     margin: 1rem;
     padding: 0.5rem;
     transition: transform 0.5s ease-in;
+    border-bottom: 1px solid black;
 }
 .side-nav-list li:hover{
     transform: translateX(20px);
-    border-left: 1px solid greenyellow;
+    border-left: 1px solid green;
 }
 .side-nav-list a{
     text-decoration: none;
+    padding: 0.2rem;
 }
+.side-nav-list a:hover{
+    text-decoration: none;
+}
+
 
 
 
@@ -26,4 +32,18 @@
     background-color: transparent;
     border: none;
     outline: none;
+}
+
+.form-size{
+    max-width: 500px;
+    margin: auto;
+}
+
+.form-size input{
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid black;
+}
+.form-size input:focus{
+    box-shadow: 0 0 0 0 black;
 }

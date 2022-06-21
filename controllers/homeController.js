@@ -1,5 +1,5 @@
 exports.renderDashboard = async(req, res) => {
-    res.send(req.url)
+    res.render('index')
 }
 
 exports.renderLogin = (req, res) => {

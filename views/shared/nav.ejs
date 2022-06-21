@@ -1,0 +1,21 @@
+<nav class="nav px-4 py-2 justify-content-between align-items-center bg-light">
+
+    <div type="button" data-bs-toggle="offcanvas" data-bs-target="#side-offcanvas-nav" aria-controls="side-offcanvas-nav">
+        <i class="fa fa-bars fa-2x btn"></i>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Admin
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+            <li><a class="dropdown-item" href="#">logs</a></li>
+            <hr style="width: 80%; margin: 0.5rem auto;">
+            <li>
+                <form class="dropdown-item" action="/logout" method="post">
+                    <input class="reset-btn" type="submit" value="Logout">
+                </form>
+            </li>
+        </ul>
+      </div>
+</nav>

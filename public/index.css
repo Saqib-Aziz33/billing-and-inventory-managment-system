@@ -1,0 +1,29 @@
+.side-nav-list{
+    list-style: none;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.side-nav-list li{
+    margin: 1rem;
+    padding: 0.5rem;
+    transition: transform 0.5s ease-in;
+}
+.side-nav-list li:hover{
+    transform: translateX(20px);
+    border-left: 1px solid greenyellow;
+}
+.side-nav-list a{
+    text-decoration: none;
+}
+
+
+
+.reset-btn{
+    padding: 0;
+    margin: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}

@@ -12,7 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // routing
-
+app.use('/', require('./routes/home'))
+app.use('/inventory', require('./routes/inventory'))
 
 // start server
 const port = process.env.PORT || 80;

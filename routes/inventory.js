@@ -8,7 +8,6 @@ router.route('/')
     .post(validateItem, inventoryController.createItem);
 router.get('/new', inventoryController.renderCreateItem)
 router.route('/:id')
-    .get(inventoryController.getItem)
     .patch(inventoryController.updateItem)
     .delete(inventoryController.deleteItem);
 

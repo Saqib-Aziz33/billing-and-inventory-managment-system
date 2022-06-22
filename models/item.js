@@ -41,3 +41,10 @@ exports.validateSchema = Joi.object({
     manufacturer: Joi.string(),
     stock: Joi.number().min(0)
 })
+
+exports.ValidateUpdate = Joi.object({
+    price: Joi.number().min(0),
+    manufacturer_price: Joi.number().min(0),
+    manufacturer: Joi.string(),
+    stock: Joi.number().min(0)
+})

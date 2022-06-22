@@ -37,7 +37,7 @@ module.exports.Item = mongoose.model('Item', new mongoose.Schema({
 exports.validateSchema = Joi.object({
     name: Joi.string().required().min(5).max(60),
     price: Joi.number().required().min(0),
-    manufacturer: Joi.string().max(60),
     manufacturer_price: Joi.number().required().min(0),
+    manufacturer: Joi.string(),
     stock: Joi.number().min(0)
 })

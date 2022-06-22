@@ -1,0 +1,13 @@
+<% if(successMsg.length){ %>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <p class="mb-0"><i class="fa fa-check"></i> <%= successMsg %>  </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>  
+
+<% if(errorMsg.length){ %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <p class="mb-0"><i class="fa fa-exclamation-triangle"></i> <%= errorMsg %>  </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<% } %>  

@@ -47,3 +47,7 @@
 .form-size input:focus{
     box-shadow: 0 0 0 0 black;
 }
+
+.bg-low-stock{
+    background-color: rgba(255, 99, 71, 0.4) !important;
+}

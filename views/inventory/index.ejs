@@ -1,2 +1,27 @@
 <%- layout('layouts/boilerplate') %>
 
+<div class="my-4">
+    <a class="btn btn-success" href="/inventory/new"><i class="fa fa-add"></i> Add</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% items.forEach((item, index) => { %>
+            <tr class="<%=item.stock < 20 ? 'bg-low-stock': ''%>">
+                <td><%= ++index %> </td>
+                <td><%= item.name %> </td>
+                <td><%= item.price %> </td>
+                <td><%= item.stock %></td>
+            </tr>
+        <% }) %> 
+    </tbody>
+</table>

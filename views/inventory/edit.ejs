@@ -1,0 +1,53 @@
+<%- layout('layouts/boilerplate') %>
+
+<form class="form-size" action="/inventory/<%=item._id%>?_method=PATCH" method="post">
+    <h3 class="mb-3">
+        <a href="/inventory"><i class="fa fa-arrow-left text-secondary"></i></a>
+         Edit <%= item.name %>
+    </h3>
+    <div class="form-floating mb-3">
+        <input value="<%=item.price%>" type="number" class="form-control" id="price" required name="price" placeholder="price" min="0">
+        <label for="price">Price</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="manufacturer" value="<%=item.manufacturer%>" maxlength="60" name="manufacturer" placeholder="manufacturer">
+        <label for="manufacturer">Manufacturer</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input value="<%=item.manufacturer_price%>" type="number" class="form-control" id="manufacturer_price" min="0" required name="manufacturer_price" placeholder="manufacturer_price">
+        <label for="manufacturer_price">Manufacturer price</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input value="<%=item.stock%>" type="number" class="form-control" id="stock" min="0" name="stock" placeholder="stock">
+        <label for="stock">Stock</label>
+    </div>
+    <div class="mb-3 d-flex justify-content-between">
+        <div>
+            <button type="submit" class="btn btn-success">Confirm</button>
+            <a href="/inventory" class="btn">Cancle</a>
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-item">
+            Delete
+        </button>
+    </div>
+</form>
+
+
+<!-- delete modal -->
+<section class="modal fade" id="delete-item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sure you want to delete?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <form action="/inventory/<%=item._id%>?_method=DELETE" method="post">
+                    <button class="btn btn-danger" type="submit">Yes</button>
+                </form>
+                <button type="button" class="btn ms-4" data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</section>

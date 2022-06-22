@@ -9,9 +9,10 @@ router.route('/')
 router.get('/new', inventoryController.renderCreateItem)
 router.route('/:id')
     .get(inventoryController.getItem)
-    .put(inventoryController.updateItem)
+    .patch(inventoryController.updateItem)
     .delete(inventoryController.deleteItem);
 
-router.post('/:id/edit', inventoryController.renderUpdateItem)
+
+router.get('/:id/edit', inventoryController.renderUpdateItem)
 
 module.exports = router

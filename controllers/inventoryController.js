@@ -1,4 +1,5 @@
 const {Item} = require('../models/item')
+const _ = require('lodash')
 
 exports.getItems = async(req, res) => {
     try {
@@ -28,12 +29,32 @@ exports.getItem = async(req, res) => {
 }
 
 exports.renderUpdateItem = async(req, res) => {
-    res.send(req.url)
+    try {
+        const item = await Item.findById(req.params.id)
+        res.render('inventory/edit', {item})
+    } catch (error) {
+        req.flash('error', error.message)
+        res.redirect('/inventory')
+    }
 }
 exports.updateItem = async(req, res) => {
-    res.send(req.url)
+    try {
+        await Item.findByIdAndUpdate(req.params.id, _.pick(req.body, ['price', 'stock', 'manufacturer', 'manufacturer_price']), {runValidators: true})
+        req.flash('success', 'Item updated')
+        res.redirect(`/inventory/${req.params.id}/edit`)
+    } catch (error) {
+        req.flash('error', error.message)
+        res.redirect('/inventory')
+    }
 }
 
 exports.deleteItem = async(req, res) => {
-    res.send(req.url)
+    try {
+        await Item.findByIdAndDelete(req.params.id)
+        req.flash('success', 'Item deleted')
+        res.redirect('/inventory')
+    } catch (error) {
+        req.flash('error', error.message)
+        res.redirect('/inventory')
+    }
 }

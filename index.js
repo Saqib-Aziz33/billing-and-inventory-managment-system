@@ -8,6 +8,7 @@ const engine = require('ejs-mate');
 const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
+const methodOverride = require('method-override')
 
 // middlewares
 app.engine('ejs', engine);
@@ -16,6 +17,7 @@ app.set('views', pathjs.join(__dirname, 'views'));
 app.use(express.static(pathjs.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method'))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,

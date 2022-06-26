@@ -8,6 +8,7 @@ exports.renderLogin = (req, res) => {
 
 exports.loginHandler = async (req, res) => {
     try {
+        delete req.session.user
         const user = await User.findOne({email: req.body.email})
         if(!user){
             req.flash('error', 'incorrect email or password')

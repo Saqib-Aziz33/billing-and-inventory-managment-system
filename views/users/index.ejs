@@ -1,0 +1,28 @@
+<%- layout('layouts/boilerplate') %>
+
+
+<% if(!users.length){ %>
+    <h4>No users in database</h4>
+    <p class="lead">Add user <a href="/users/new">here</a></p>
+<% }else{ %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach((user, index) => { %>
+                <tr>
+                    <td><%= ++index %> </td>
+                    <td><%= user.username %> </td>
+                    <td><%= user.email %> </td>
+                    <td><%= String(user.created_at).slice(0, 15) %> </td>
+                </tr>
+            <% }) %>  
+        </tbody>
+    </table>
+<% } %>  

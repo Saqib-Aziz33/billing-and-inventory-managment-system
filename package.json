@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Saqib-Aziz33/billing-and-inventory-managment-system#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",

@@ -18,3 +18,19 @@ exports.validateUser = (req, res, next) => {
     }
     next()
 }
+
+exports.isAdmin = (req, res, next) => {
+    if(!req.session.user.isAdmin){
+        req.flash('error', "you don't have this permission")
+        return res.redirect('/error')
+    }
+    next()
+}
+
+exports.isAuthenticated = (req, res, next) => {
+    if(!req.session.user){
+        req.flash('error', "login required")
+        return res.redirect('/login')
+    }
+    next()
+}

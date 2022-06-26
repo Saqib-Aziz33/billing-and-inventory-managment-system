@@ -9,7 +9,9 @@
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Manufacturer</th>
-                <th>Actions</th>
+                <% if(user.isAdmin){ %>
+                    <th>Actions</th>
+                <% } %>  
             </tr>
         </thead>
 
@@ -21,44 +23,48 @@
                     <td><%= item.price %> </td>
                     <td><%= item.stock %></td>
                     <td><%= item.manufacturer %> </td>
-                    <td>
-                        <button class="reset-btn text-secondary" type="button" data-bs-toggle="modal" data-bs-target="#info<%=item._id%>">
-                            <i class="fa fa-info-circle"></i>
-                        </button>
-                        <a href="/inventory/<%=item._id%>/edit" class="btn btn-sm btn-success ms-2">Edit</a>
-                    </td>
+                    <% if(user.isAdmin){ %>
+                        <td>
+                            <button class="reset-btn text-secondary" type="button" data-bs-toggle="modal" data-bs-target="#info<%=item._id%>">
+                                <i class="fa fa-info-circle"></i>
+                            </button>
+                            <a href="/inventory/<%=item._id%>/edit" class="btn btn-sm btn-success ms-2">Edit</a>
+                        </td>
+                    <% } %>  
                 </tr>
 
                 <!-- item details modal -->
-                <div class="modal fade" id="info<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><%= item.name %> </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <% if(user.isAdmin){ %>
+                    <div class="modal fade" id="info<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><%= item.name %> </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <p class="text-muted"><strong>_id: </strong> <%= item._id %> </p>
+                            <p class="text-muted"><strong>Price: </strong> <%= item.price %> </p>
+                            <p class="text-muted"><strong>Manufacturer price: </strong> <%= item.manufacturer_price %> </p>
+                            <p class="text-muted"><strong>Profit: </strong><%= item.price - item.manufacturer_price %> per item </p>
+                            <p class="text-muted"><strong>Manufacturer: </strong> <%= item.manufacturer %> </p>
+                            <% if(item.stock < 20){ %>
+                                <p class="text-danger">
+                                    <strong class="me-2">Stock: </strong>
+                                    <%= item.stock %>-- 
+                                    <span> <i class="fa fa-exclamation-triangle"></i> low quantity,</span>
+                                    <a href="/inventory/<%=item._id%>/edit" class="ms-2">Add More</a>
+                                </p>
+                            <% }else{ %>
+                                <p class="text-muted"><strong>Stock: </strong><%= item.stock %></p>
+                            <% } %>   
+                            <p class="text-muted"><strong>Created: </strong> <%= item.created_date %> </p>
+                            <p class="text-muted"><strong>Last Modified: </strong> <%= item.modified_date %> </p>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                        <p class="text-muted"><strong>_id: </strong> <%= item._id %> </p>
-                        <p class="text-muted"><strong>Price: </strong> <%= item.price %> </p>
-                        <p class="text-muted"><strong>Manufacturer price: </strong> <%= item.manufacturer_price %> </p>
-                        <p class="text-muted"><strong>Profit: </strong><%= item.price - item.manufacturer_price %> per item </p>
-                        <p class="text-muted"><strong>Manufacturer: </strong> <%= item.manufacturer %> </p>
-                        <% if(item.stock < 20){ %>
-                            <p class="text-danger">
-                                <strong class="me-2">Stock: </strong>
-                                <%= item.stock %>-- 
-                                <span> <i class="fa fa-exclamation-triangle"></i> low quantity,</span>
-                                <a href="/inventory/<%=item._id%>/edit" class="ms-2">Add More</a>
-                            </p>
-                        <% }else{ %>
-                            <p class="text-muted"><strong>Stock: </strong><%= item.stock %></p>
-                        <% } %>   
-                        <p class="text-muted"><strong>Created: </strong> <%= item.created_date %> </p>
-                        <p class="text-muted"><strong>Last Modified: </strong> <%= item.modified_date %> </p>
                         </div>
                     </div>
-                    </div>
-                </div>
+                <% } %>  
             <% }) %> 
         </tbody>
     </table>

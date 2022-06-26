@@ -1,0 +1,16 @@
+<%- layout('layouts/boilerplate') %>
+
+<form action="/login" method="post" class="form-size">
+    <h2 class="mb-4">Login</h2>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="email" required name="email" placeholder="email" minlength="5" maxlength="60">
+        <label for="email">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password" minlength="5" maxlength="60" name="password" placeholder="password">
+        <label for="password">Password</label>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success btn-lg m-3">Login</button>
+    </div>
+</form>

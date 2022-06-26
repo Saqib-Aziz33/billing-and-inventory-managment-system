@@ -1,17 +1,17 @@
 const express = require('express')
 const router = express.Router()
 const inventoryController = require('../controllers/inventoryController')
-const {validateItem} = require('../util/middlewares')
+const {validateItem, isAdmin} = require('../util/middlewares')
 
 router.route('/')
     .get(inventoryController.getItems)
-    .post(validateItem, inventoryController.createItem);
+    .post(isAdmin ,validateItem, inventoryController.createItem);
 router.get('/new', inventoryController.renderCreateItem)
 router.route('/:id')
-    .patch(inventoryController.updateItem)
-    .delete(inventoryController.deleteItem);
+    .patch(isAdmin, inventoryController.updateItem)
+    .delete(isAdmin, inventoryController.deleteItem);
 
 
-router.get('/:id/edit', inventoryController.renderUpdateItem)
+router.get('/:id/edit', isAdmin, inventoryController.renderUpdateItem)
 
 module.exports = router

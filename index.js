@@ -9,6 +9,8 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
+// files
+const {isAuthenticated} = require('./util/middlewares')
 
 // middlewares
 app.engine('ejs', engine);
@@ -32,6 +34,7 @@ app.use(flash())
 app.use((req, res, next) => {
     res.locals.successMsg = req.flash('success')
     res.locals.errorMsg = req.flash('error')
+    res.locals.user = req.session.user
     next()
 })
 
@@ -42,8 +45,8 @@ mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/billing')
 
 // routing
 app.use('/', require('./routes/home'))
-app.use('/users', require('./routes/users'))
-app.use('/inventory', require('./routes/inventory'))
+app.use('/users', isAuthenticated, require('./routes/users'))
+app.use('/inventory', isAuthenticated, require('./routes/inventory'))
 
 // start server
 const port = process.env.PORT || 80;

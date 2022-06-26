@@ -4,18 +4,25 @@
         <i class="fa fa-bars fa-2x btn"></i>
     </div>
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          Admin
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="adminDropdown">
-            <li><a class="dropdown-item" href="#">logs</a></li>
-            <hr style="width: 80%; margin: 0.5rem auto;">
-            <li>
-                <form class="dropdown-item" action="/logout" method="post">
-                    <input class="reset-btn" type="submit" value="Logout">
-                </form>
-            </li>
-        </ul>
-      </div>
+    
+        <% if(user){ %>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <%= user.username %> 
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                    <% if(user && user.isAdmin){ %>
+                        <li><a class="dropdown-item" href="#">logs</a></li>
+                    <% } %>  
+                    <li>
+                        <hr style="width: 80%; margin: 0.5rem auto;">
+                        <form class="dropdown-item" action="/logout" method="post">
+                            <input class="reset-btn" type="submit" value="Logout">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        <% }else{ %>
+            <a class="btn btn-secondary" href="/login">Login</a>
+        <% } %>   
 </nav>

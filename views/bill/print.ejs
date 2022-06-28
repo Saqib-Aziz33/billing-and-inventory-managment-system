@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;line-height: 1.2;}
+        th, td{
+            border: 1px solid black;
+            text-align: start;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Bill ID:</th>
+                <td colspan="3"><%= bill._id %></td>
+            </tr>
+            <tr>
+                <th>Customer Name:</th>
+                <td colspan="3"><%= bill.customer_name %></td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td colspan="3"><%= String(bill.created_at).slice(0, 15) %></td>
+            </tr>
+            <tr>
+                <td style="color: red;text-align: center;" colspan="4">******</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let item of bill.items){ %>
+                <tr>
+                    <td><%= item.name %> </td>
+                    <td><%= item.price %> </td>
+                    <td><%= item.quantity %> </td>
+                    <td><%= item.total %> </td>
+                </tr>
+            <% } %>  
+        </tbody>
+        <tr>
+            <td style="color: red;text-align: center;" colspan="4">******</td>
+        </tr>
+        <tfoot class="text-center">
+            <tr>
+                <th>Grand Total:</th>
+                <th colspan="3"><%= bill.grandTotal %> </th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+<script>
+    window.onload = function(){
+        window.print()
+    }
+</script>
+</html>

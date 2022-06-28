@@ -1,0 +1,29 @@
+<%- layout('layouts/boilerplate') %>
+
+<form action="/bill" method="post">
+    <div class="my-3">
+        <input type="text" name="customer_name" placeholder="customer name">
+    </div>
+    <div class="my-3">
+        <input list="items" type="text" name="item[id]" placeholder="item id">
+        <input type="number" name="item[quantity]" value="1" placeholder="quantity">
+    </div>
+    <div id="fields-container"></div>
+    <div class="mb-5">
+        <button type="button" id="add-more">More</button>
+    </div>
+    <div class="my-3">
+        <button type="submit">Proceed</button>
+    </div>
+</form>
+
+
+
+<datalist id="items">
+    <% for(let item of items){ %>
+        <option value="<%=item._id%>"><%= item.name %></option>
+    <% } %>  
+</datalist>
+
+
+<script src="/addBillField.js"></script>

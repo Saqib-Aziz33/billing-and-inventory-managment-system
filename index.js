@@ -47,6 +47,7 @@ mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/billing')
 app.use('/', require('./routes/home'))
 app.use('/users', isAuthenticated, require('./routes/users'))
 app.use('/inventory', isAuthenticated, require('./routes/inventory'))
+app.use('/bill', isAuthenticated, require('./routes/bill'))
 
 // start server
 const port = process.env.PORT || 80;

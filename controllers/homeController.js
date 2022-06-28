@@ -21,7 +21,7 @@ exports.loginHandler = async (req, res) => {
         }
         req.session.user = _.pick(user, '_id', 'username', 'isAdmin')
         req.flash('success', 'welcome to billing application')
-        res.redirect('/inventory')
+        res.redirect('/bill')
     } catch (error) {
         res.send(error.message)
     }

@@ -1,3 +1,10 @@
+:root{
+    --clr-success-50: #1cc88975;
+}
 .product-form{
     max-width: 400px;
+}
+
+.form-control:focus{
+    box-shadow: 0 0 0 0.2rem var(--clr-success-50);
 }

@@ -1,16 +1,59 @@
-<%- layout('layouts/boilerplate') %>
+<!DOCTYPE html>
+<html lang="en">
 
-<form action="/login" method="post" class="form-size">
-    <h2 class="mb-4">Login</h2>
-    <div class="form-floating mb-3">
-        <input type="email" class="form-control" id="email" required name="email" placeholder="email" minlength="5" maxlength="60">
-        <label for="email">Email</label>
-    </div>
-    <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="password" minlength="5" maxlength="60" name="password" placeholder="password">
-        <label for="password">Password</label>
-    </div>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-success btn-lg m-3">Login</button>
-    </div>
-</form>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/sb-admin-2.min.css" rel="stylesheet">
+    <!-- datatable -->
+    <link rel="stylesheet" href="/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body class="bg-gradient-success">
+
+    
+    <div class="container">
+            <%- include('./shared/flash')  %> 
+
+            <div class="card mt-4 mx-auto" style="max-width: 500px;">
+                <div class="card-header text-center">
+                    <h4>Login to your account</h4>
+                </div>
+                <div class="card-body">
+                    <form class="user" method="post" action="/login">
+                        <div class="form-group">
+                            <input type="email" required name="email" class="form-control form-control-user" id="exampleInputEmail" minlength="5" maxlength="60"
+                            aria-describedby="emailHelp" placeholder="Enter Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" min="6" required name="password" class="form-control form-control-user"
+                                id="exampleInputPassword" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-success btn-user btn-block">Login</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+</body>
+
+<!-- Bootstrap core JavaScript-->
+<script src="/jquery.min.js"></script>
+<script src="/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="/sb-admin-2.min.js"></script>
+
+</html>

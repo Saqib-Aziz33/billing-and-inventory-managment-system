@@ -6,20 +6,20 @@
          Edit <%= item.name %>
     </h3>
     <div class="form-floating mb-3">
-        <input value="<%=item.price%>" type="number" class="form-control" id="price" required name="price" placeholder="price" min="0">
         <label for="price">Price</label>
+        <input value="<%=item.price%>" type="number" class="form-control" id="price" required name="price" placeholder="price" min="0">
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="manufacturer" value="<%=item.manufacturer%>" maxlength="60" name="manufacturer" placeholder="manufacturer">
         <label for="manufacturer">Manufacturer</label>
+        <input type="text" class="form-control" id="manufacturer" value="<%=item.manufacturer%>" maxlength="60" name="manufacturer" placeholder="manufacturer">
     </div>
     <div class="form-floating mb-3">
-        <input value="<%=item.manufacturer_price%>" type="number" class="form-control" id="manufacturer_price" min="0" required name="manufacturer_price" placeholder="manufacturer_price">
         <label for="manufacturer_price">Manufacturer price</label>
+        <input value="<%=item.manufacturer_price%>" type="number" class="form-control" id="manufacturer_price" min="0" required name="manufacturer_price" placeholder="manufacturer_price">
     </div>
     <div class="form-floating mb-3">
-        <input value="<%=item.stock%>" type="number" class="form-control" id="stock" min="0" name="stock" placeholder="stock">
         <label for="stock">Stock</label>
+        <input value="<%=item.stock%>" type="number" class="form-control" id="stock" min="0" name="stock" placeholder="stock">
     </div>
     <div class="mb-3 d-flex justify-content-between">
         <div>
@@ -27,27 +27,35 @@
             <a href="/inventory" class="btn">Cancle</a>
         </div>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-item">
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-item">
             Delete
-        </button>
+          </button>
     </div>
 </form>
 
 
 <!-- delete modal -->
-<section class="modal fade" id="delete-item" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="delete-item" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sure you want to delete?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex">
-                <form action="/inventory/<%=item._id%>?_method=DELETE" method="post">
-                    <button class="btn btn-danger" type="submit">Yes</button>
-                </form>
-                <button type="button" class="btn ms-4" data-bs-dismiss="modal">No</button>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Sure you want to delete?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div class="modal-body d-flex">
+            <form action="/inventory/<%=item._id%>?_method=DELETE" method="post">
+                <button class="btn btn-danger" type="submit">Yes</button>
+            </form>
+            <button type="button" class="btn ml-4" data-dismiss="modal">No</button>
+        </div>
+      </div>
     </div>
-</section>
+  </div>

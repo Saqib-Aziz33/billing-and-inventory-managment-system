@@ -3,24 +3,24 @@
 <form action="/inventory" method="post" class="form-size">
     <h2 class="mb-4">Add new item</h2>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="name" required name="name" placeholder="name" minlength="5" maxlength="60">
         <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" required name="name" minlength="5" maxlength="60">
     </div>
     <div class="form-floating mb-3">
-        <input type="number" class="form-control" id="price" required name="price" placeholder="price" min="0">
         <label for="price">Price</label>
+        <input type="number" class="form-control" id="price" required name="price" min="0">
     </div>
     <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="manufacturer" value="local" maxlength="60" name="manufacturer" placeholder="manufacturer">
         <label for="manufacturer">Manufacturer</label>
+        <input type="text" class="form-control" id="manufacturer" value="local" maxlength="60" name="manufacturer">
     </div>
     <div class="form-floating mb-3">
-        <input type="number" class="form-control" id="manufacturer_price" min="0" required name="manufacturer_price" placeholder="manufacturer_price">
         <label for="manufacturer_price">Manufacturer price</label>
+        <input type="number" class="form-control" id="manufacturer_price" min="0" required name="manufacturer_price">
     </div>
     <div class="form-floating mb-3">
-        <input type="number" class="form-control" id="stock" min="0" name="stock" placeholder="stock" value="50">
         <label for="stock">Stock</label>
+        <input type="number" class="form-control" id="stock" min="0" name="stock" value="50">
     </div>
     <div class="mb-3">
         <button type="submit" class="btn btn-success btn-lg m-3">Add</button>

@@ -5,63 +5,71 @@
     <h4>No users in database</h4>
     <p class="lead">Add user <a href="/users/new">here</a></p>
 <% }else{ %>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Created At</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% users.forEach((user, index) => { %>
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
                 <tr>
-                    <td><%= ++index %> </td>
-                    <td><%= user.username %> </td>
-                    <td><%= user.email %> </td>
-                    <td><%= String(user.created_at).slice(0, 15) %> </td>
-                    <td>
-                        <button class="btn btn-success btn-sm"  type="button" data-bs-toggle="modal" data-bs-target="#update<%=user._id%>">Modify</button>
-                    </td>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
                 </tr>
-                <!-- edit modal -->
-                <div class="modal fade" id="update<%=user._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit <%= user.username %> </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </thead>
+            <tbody>
+                <% users.forEach((user, index) => { %>
+                    <tr>
+                        <td><%= ++index %> </td>
+                        <td><%= user.username %> </td>
+                        <td><%= user.email %> </td>
+                        <td><%= String(user.created_at).slice(0, 15) %> </td>
+                        <td>
+                            <button class="btn btn-success btn-sm"  type="button" data-bs-toggle="modal" data-bs-target="#update<%=user._id%>">Modify</button>
+                        </td>
+                    </tr>
+                    <!-- edit modal -->
+                    <div class="modal fade" id="update<%=user._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit <%= user.username %> </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/users/<%=user._id%>?_method=PATCH" method="post">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Username</label>
+                                        <input type="text" name="username" id="username" value="<%=user.username%>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control" value="<%=user.email%>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password">Change Password</label>
+                                        <input type="password" name="password" id="password" class="form-control">
+                                        <small class="text-muted">Only if you want to change password</small>
+                                    </div>
+                                    <button class="btn btn-success">Update</button>
+                                    <hr>
+                                    <div class="my-4">
+                                        <form class="d-inline" action="/users/<%=user._id%>?_method=DELETE" method="post">
+                                            <button class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <form action="/users/<%=user._id%>?_method=PATCH" method="post">
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" name="username" id="username" value="<%=user.username%>" class="form-control">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" value="<%=user.email%>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password">Change Password</label>
-                                    <input type="password" name="password" id="password" class="form-control">
-                                    <small class="text-muted">Only if you want to change password</small>
-                                </div>
-                                <button class="btn btn-success">Update</button>
-                                <hr>
-                                <div class="my-4">
-                                    <form class="d-inline" action="/users/<%=user._id%>?_method=DELETE" method="post">
-                                        <button class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
-                            </form>
                         </div>
                     </div>
-                    </div>
-                </div>
-            <% }) %>  
-        </tbody>
-    </table>
+                <% }) %>  
+            </tbody>
+        </table>
+    </div>
 <% } %>  
+
+<!-- data tables -->
+<script defer src="/jquery.dataTables.min.js"></script>
+<script defer src="/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="/jquery.easing.min.js"></script> -->
+<script defer src="/datatables-demo.js"></script>

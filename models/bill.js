@@ -6,6 +6,7 @@ module.exports.Bill = mongoose.model('Bill', new mongoose.Schema({
         type: String,
         required: true
     },
+    customer_phone: String,
     items: [
         {
             _id: false,

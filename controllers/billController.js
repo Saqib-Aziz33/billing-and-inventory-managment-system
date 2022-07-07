@@ -75,6 +75,7 @@ exports.createBill = async (req, res) => {
         // create bill
         const bill = new Bill({
             customer_name: req.body.customer_name,
+            customer_phone: req.body.customer_phone,
             items: itemsCollection,
             author: req.user._id,
             grandTotal: calculateGrandTotal(itemsCollection)

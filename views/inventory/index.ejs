@@ -1,71 +1,96 @@
 <%- layout('layouts/boilerplate') %>
+<style>
+    .bg-low-stock{
+        background-color: rgb(228, 137, 137);
+        color: whitesmoke;
+    }
+</style>
+<main class="card shadow mb-4">
+    <div class="card-header py-3 pb-0">
+        <h4 class="m-0 font-weight-bold text-primary">Inventory</h4>
+        <a class="btn btn-primary mt-3" href="/inventory/new">New</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Manufacturer</th>
+                        <% if(user.isAdmin){ %>
+                            <th>Actions</th>
+                        <% } %>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <% items.forEach((item, index) => { %>
+                        <tr class="<%=item.stock < 20 ? 'bg-low-stock': ''%>">
+                            <td><%= ++index %> </td>
+                            <td><%= item.name %> </td>
+                            <td><%= item.price %> </td>
+                            <td><%= item.stock %></td>
+                            <td><%= item.manufacturer %> </td>
+                            <% if(user.isAdmin){ %>
+                                <td>
+                                    <!-- modal toggle btn -->
+                                    <button type="button" class="btn" data-toggle="modal" data-target="#info<%=item._id%>">
+                                        <i class="fa fa-info-circle"></i>
+                                    </button>
+                                    <a href="/inventory/<%=item._id%>/edit" class="btn btn-sm btn-success ms-2">Edit</a>
+                                </td>
+                            <% } %>  
+                            <!-- item details modal -->
+                            <% if(user.isAdmin){ %>
+                                <!-- Modal -->
+                                        <div class="modal fade" id="info<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel"><%= item.name %> </h5>
+                                                    
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <p class="text-muted"><strong>_id: </strong> <%= item._id %> </p>
+                                                    <p class="text-muted"><strong>Price: </strong> <%= item.price %> </p>
+                                                    <p class="text-muted"><strong>Manufacturer price: </strong> <%= item.manufacturer_price %> </p>
+                                                    <p class="text-muted"><strong>Profit: </strong><%= item.price - item.manufacturer_price %> per item </p>
+                                                    <p class="text-muted"><strong>Manufacturer: </strong> <%= item.manufacturer %> </p>
+                                                    <% if(item.stock < 20){ %>
+                                                        <p class="text-danger">
+                                                            <strong class="me-2">Stock: </strong>
+                                                            <%= item.stock %>-- 
+                                                            <span> <i class="fa fa-exclamation-triangle"></i> low quantity,</span>
+                                                            <a href="/inventory/<%=item._id%>/edit" class="ms-2">Add More</a>
+                                                        </p>
+                                                    <% }else{ %>
+                                                        <p class="text-muted"><strong>Stock: </strong><%= item.stock %></p>
+                                                    <% } %>   
+                                                    <p class="text-muted"><strong>Created: </strong> <%= String(item.created_date).slice(0, 10) %> </p>
+                                                    <p class="text-muted"><strong>Last Modified: </strong> <%= String(item.modified_date).slice(0, 10) %> </p>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                            <% } %>  
+                        </tr>
+        
+                    <% }) %> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
 
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Stock</th>
-                <th>Manufacturer</th>
-                <% if(user.isAdmin){ %>
-                    <th>Actions</th>
-                <% } %>  
-            </tr>
-        </thead>
 
-        <tbody>
-            <% items.forEach((item, index) => { %>
-                <tr class="<%=item.stock < 20 ? 'bg-low-stock': ''%>">
-                    <td><%= ++index %> </td>
-                    <td><%= item.name %> </td>
-                    <td><%= item.price %> </td>
-                    <td><%= item.stock %></td>
-                    <td><%= item.manufacturer %> </td>
-                    <% if(user.isAdmin){ %>
-                        <td>
-                            <button class="reset-btn text-secondary" type="button" data-bs-toggle="modal" data-bs-target="#info<%=item._id%>">
-                                <i class="fa fa-info-circle"></i>
-                            </button>
-                            <a href="/inventory/<%=item._id%>/edit" class="btn btn-sm btn-success ms-2">Edit</a>
-                        </td>
-                    <% } %>  
-                </tr>
-
-                <!-- item details modal -->
-                <% if(user.isAdmin){ %>
-                    <div class="modal fade" id="info<%=item._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel"><%= item.name %> </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <p class="text-muted"><strong>_id: </strong> <%= item._id %> </p>
-                            <p class="text-muted"><strong>Price: </strong> <%= item.price %> </p>
-                            <p class="text-muted"><strong>Manufacturer price: </strong> <%= item.manufacturer_price %> </p>
-                            <p class="text-muted"><strong>Profit: </strong><%= item.price - item.manufacturer_price %> per item </p>
-                            <p class="text-muted"><strong>Manufacturer: </strong> <%= item.manufacturer %> </p>
-                            <% if(item.stock < 20){ %>
-                                <p class="text-danger">
-                                    <strong class="me-2">Stock: </strong>
-                                    <%= item.stock %>-- 
-                                    <span> <i class="fa fa-exclamation-triangle"></i> low quantity,</span>
-                                    <a href="/inventory/<%=item._id%>/edit" class="ms-2">Add More</a>
-                                </p>
-                            <% }else{ %>
-                                <p class="text-muted"><strong>Stock: </strong><%= item.stock %></p>
-                            <% } %>   
-                            <p class="text-muted"><strong>Created: </strong> <%= item.created_date %> </p>
-                            <p class="text-muted"><strong>Last Modified: </strong> <%= item.modified_date %> </p>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                <% } %>  
-            <% }) %> 
-        </tbody>
-    </table>
-</div>
+<!-- data tables -->
+<script defer src="/jquery.dataTables.min.js"></script>
+<script defer src="/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="/jquery.easing.min.js"></script> -->
+<script defer src="/datatables-demo.js"></script>

@@ -9,8 +9,13 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
 const methodOverride = require('method-override')
+const MongoStore = require('connect-mongo');
+const helmet = require('helmet')
+const compression = require('compression')
 // files
 const {isAuthenticated} = require('./util/middlewares')
+
+const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/billing'
 
 // middlewares
 app.engine('ejs', engine);
@@ -21,6 +26,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method'))
 app.use(session({
+    store: MongoStore.create({
+        mongoUrl: DB_URL,
+        touchAfter: 24*60*60,
+        secret: process.env.SESSION_SECRET
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
@@ -37,9 +47,11 @@ app.use((req, res, next) => {
     res.locals.user = req.session.user
     next()
 })
+app.use(helmet())
+app.use(compression())
 
 // database
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/billing')
+mongoose.connect(DB_URL)
     .then(res => console.log('connected to', res.connection.host))
     .catch(err => console.log('connection error'));
 

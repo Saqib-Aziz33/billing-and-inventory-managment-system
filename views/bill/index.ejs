@@ -2,8 +2,29 @@
 
 <a href="/bill/new">New bill</a>
 
-<div class="my-4">
-    <table class="table">
-        <p>total bills: <%= bills.length %> </p>
-    </table>
-</div>
+<% 
+    let totalEarnings = 0;
+    for(let bill of bills){
+        totalEarnings += bill.grandTotal
+    }
+    %> 
+<section class="my-5">
+    <p>total bills: <%= bills.length %> </p>
+    <article class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                        Earnings (Total)</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">$<%= totalEarnings %> </div>
+                </div>
+                <div class="col-auto">
+                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+            </div>
+        </div>
+    </article>
+    <article>
+
+    </article>
+</section>

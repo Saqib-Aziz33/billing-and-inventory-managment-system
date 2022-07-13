@@ -1,5 +1,6 @@
 const userModel = require('../models/user')
 const {User} = userModel
+const {Bill} = require('../models/bill')
 const _ = require('lodash')
 const bcrypt = require('bcrypt')
 
@@ -7,7 +8,8 @@ const bcrypt = require('bcrypt')
 exports.allUsers = async (req, res) => {
     try {
         const users = await User.find({isAdmin: {$ne: true}})
-        res.render('users/index', {users})
+        const bills = await Bill.find({})
+        res.render('users/index', {users, bills})
     } catch (error) {
         res.send(error.message)
     }

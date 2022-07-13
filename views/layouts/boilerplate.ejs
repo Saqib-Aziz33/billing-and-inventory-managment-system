@@ -64,6 +64,14 @@
                         <span>Inventory</span>
                     </a>
                 </li>
+                <% if(user.isAdmin){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users">
+                            <i class="fa fa-fw fa-user"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                <% } %>  
     
             </ul>
             <!-- End of Sidebar -->

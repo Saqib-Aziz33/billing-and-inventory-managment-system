@@ -11,7 +11,7 @@ router.get('/new', usersController.renderCreateUser);
 
 router.route('/:id')
     .patch(isAdmin, usersController.updateUser)
-    .delete(isAdmin, usersController.deleteUser)
+    .delete(isAdmin, usersController.deleteUser);
 
 
 module.exports = router
